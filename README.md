@@ -1,13 +1,17 @@
 # rock-paper-scissors
 
-INITIALIZE choices
+INITIALIZE choices array
 INITIALIZE humanScore and computerScore
 
 GET computers random choice
+    SET computer choice to random number in array
 
 GET human choice
-    CASE choice is valid
-    CASE choice is invalid
+    IF choice is valid
+    SET human choice
+
+    ELSE
+    DISPLAY invalid message
 
 WHILE # of rounds < 5
 REPEAT until rounds == 5
