@@ -3,20 +3,31 @@
 INITIALIZE choices array
 INITIALIZE humanScore and computerScore
 
-GET computers random choice
+GET computerChoice
     SET computer choice to random number in array
 
-GET human choice
+GET humanChoice
     IF choice is valid
     SET human choice
-
     ELSE
     DISPLAY invalid message
+    *Add an exit??
 
-WHILE # of rounds < 5
-REPEAT until rounds == 5
+GET roundWinner
+    IF computerChoice beats humanChoice
+        ADD 1 to computerScore
+    IF humanChoice beats computerChoice
+        ADD 1 to humanScore
+    ELSE
+        redoRound
 
-IF humanScore > computerScore
-DISPLAY human winner
-ELSE
-DISPLAY computer winner
+GET winner
+    IF humanScore > computerScore
+    DISPLAY human winner
+    ELSE
+    DISPLAY computer winner
+
+gameLoop
+    WHILE # of rounds < 5
+    REPEAT until rounds == 5
+    DISPLAY winner
