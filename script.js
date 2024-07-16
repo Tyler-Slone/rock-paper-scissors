@@ -1,10 +1,13 @@
 const choices = ['rock', 'paper', 'scissors']
-const humanScore = 0
-const computerScore = 0
+var computerChoice
+var humanChoice
+var humanScore = 0
+var computerScore = 0
+
 
 function getComputerChoice(){
-   randomChoice = choices[(Math.random() * choices.length) | 0]
-   return randomChoice
+   computerChoice = choices[(Math.random() * choices.length) | 0]
+   return computerChoice
 }
 
 function getHumanChoice(){
@@ -48,5 +51,5 @@ function roundWinner() {
     }
 }
 
-console.log(getComputerChoice())
 console.log(getHumanChoice())
+console.log(getComputerChoice())
