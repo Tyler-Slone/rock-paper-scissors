@@ -6,7 +6,7 @@ var computerScore = 0
 
 
 function getComputerChoice(){
-   computerChoice = choices[(Math.random() * choices.length) | 0]
+   let computerChoice = choices[(Math.random() * choices.length) | 0]
    return computerChoice
 }
 
@@ -51,5 +51,25 @@ function roundWinner() {
     }
 }
 
+function gameLoop(){
+    let rounds = 0
+    while (rounds < 5) {
+        getComputerChoice()
+        getHumanChoice()
+        roundWinner()
+        rounds++
+    }
+
+    if (humanScore > computerScore) {
+        console.log('You Win!')
+    } else {
+        console.log('Computer Wins!')
+    }
+}
+
+
 console.log(getHumanChoice())
 console.log(getComputerChoice())
+console.log(gameLoop())
+console.log(humanScore)
+console.log(computerScore)
