@@ -1,75 +1,87 @@
+// Game variables and choice list
 const choices = ['rock', 'paper', 'scissors']
-var computerChoice
-var humanChoice
-var humanScore = 0
+
 var computerScore = 0
+var humanScore = 0
 
 
+
+// Gets random choice from the computer
 function getComputerChoice(){
-   let computerChoice = choices[(Math.random() * choices.length) | 0]
-   return computerChoice
+   return choices[(Math.random() * choices.length)|0]
 }
 
+// Gets choice from player
 function getHumanChoice(){
-    let humanChoice = prompt('Type: Rock, Paper, or Scissors').toLowerCase();
+    let humanChoice = prompt('Type: Rock, Paper, or Scissors').toLowerCase()
     if (choices.includes(humanChoice)){
-        console.log(humanChoice)
+        return (humanChoice)
     }
     else {
         console.log('Please enter a valid input')
-        getHumanChoice();
+        return getHumanChoice()
     }
 }
 
-function roundWinner() {
+// Determines who won the round and increments the score of the winner by 1
+function roundWinner(humanChoice, computerChoice) {
     if (humanChoice === computerChoice){
         console.log('Tie')
     }
     if (humanChoice === 'rock'  && computerChoice === 'paper'){
-        console.log('Computer wins')
+        console.log('Computer wins the round')
         computerScore++
     }
     if (humanChoice === 'rock'  && computerChoice === 'scissors'){
-        console.log('Round won')
+        console.log('You won the round')
         humanScore++
     }
     if (humanChoice === 'paper'  && computerChoice === 'rock'){
-        console.log('Round won')
+        console.log('You won the round')
         humanScore++
     }
     if (humanChoice === 'paper'  && computerChoice === 'scissors'){
-        console.log('Computer wins')
+        console.log('Computer wins the round')
         computerScore++
     }
     if (humanChoice === 'scissors'  && computerChoice === 'rock'){
-        console.log('Computer wins')
+        console.log('Computer wins the round')
         computerScore++
     }
     if (humanChoice === 'scissors'  && computerChoice === 'paper'){
-        console.log('Round won')
+        console.log('You won the round')
         humanScore++
     }
 }
 
+// Main gameplay function 
 function gameLoop(){
     let rounds = 0
+    humanScore = 0
+    computerScore = 0
+    
     while (rounds < 5) {
-        getComputerChoice()
-        getHumanChoice()
-        roundWinner()
+        const computerSelection = getComputerChoice()
+        const humanSelection = getHumanChoice()
+        roundWinner(humanSelection, computerSelection)
         rounds++
+        console.log(humanScore)
+        console.log(computerScore)
     }
-
+    
+    
     if (humanScore > computerScore) {
         console.log('You Win!')
-    } else {
+    } 
+    if (humanScore < computerScore) {
         console.log('Computer Wins!')
+    } 
+    else {
+        console.log('It\'s a Tie!')
     }
 }
 
 
-console.log(getHumanChoice())
-console.log(getComputerChoice())
+
+
 console.log(gameLoop())
-console.log(humanScore)
-console.log(computerScore)
