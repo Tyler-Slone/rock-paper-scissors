@@ -1,79 +1,73 @@
-// Game variables and choice list
+// Game variables and selectors
 const choices = ["rock", "paper", "scissors"];
 
-var computerScore = 0;
-var humanScore = 0;
+let computerScore = 0;
+let userScore = 0;
 
-// Gets random choice from the computer
+const rockButton = document.querySelector("#rockButton");
+const paperButton = document.querySelector("#paperButton");
+const scissorsButton = document.querySelector("#scissorsButton");
+
+const userDisplayScore = document.querySelector("#userDisplayScore");
+const computerDisplayScore = document.querySelector("#computerDisplayScore");
+const displayWinner = document.querySelector("#displayWinner");
+
+// Get random choice from computer
 function getComputerChoice() {
-  return choices[(Math.random() * choices.length) | 0];
+  const randomChoice = choices[(Math.random() * choices.length) | 0];
+  return randomChoice;
 }
 
-// Gets choice from player
-function getHumanChoice() {
-  let humanChoice = prompt("Type: Rock, Paper, or Scissors").toLowerCase();
-  if (choices.includes(humanChoice)) {
-    return humanChoice;
+// Round win
+function win() {
+  userDisplayScore.textContent = userScore++;
+  displayWinner.textContent = "ROUND WON";
+  console.log("Round won");
+}
+
+// Round lose
+function lose() {
+  computerDisplayScore.textContent = computerScore++;
+  displayWinner.textContent = "ROUND LOST";
+  console.log("Round lost");
+}
+
+// Round tie
+function tie() {
+  displayWinner.textContent = "TIE";
+  console.log("Tie");
+}
+
+// Determine roundWinner
+function roundWinner(userChoice, computerChoice) {
+  if (userChoice === computerChoice) {
+    tie();
+  } else if (
+    (userChoice === "rock" && computerChoice === "scissors") ||
+    (userChoice === "paper" && computerChoice === "rock") ||
+    (userChoice === "scissors" && computerChoice === "paper")
+  ) {
+    win();
   } else {
-    console.log("Please enter a valid input");
-    return getHumanChoice();
+    lose();
   }
 }
 
-// Determines who won the round and increments the score of the winner by 1
-function roundWinner(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    console.log("Tie");
-  }
-  if (humanChoice === "rock" && computerChoice === "paper") {
-    console.log("Computer wins the round");
-    computerScore++;
-  }
-  if (humanChoice === "rock" && computerChoice === "scissors") {
-    console.log("You won the round");
-    humanScore++;
-  }
-  if (humanChoice === "paper" && computerChoice === "rock") {
-    console.log("You won the round");
-    humanScore++;
-  }
-  if (humanChoice === "paper" && computerChoice === "scissors") {
-    console.log("Computer wins the round");
-    computerScore++;
-  }
-  if (humanChoice === "scissors" && computerChoice === "rock") {
-    console.log("Computer wins the round");
-    computerScore++;
-  }
-  if (humanChoice === "scissors" && computerChoice === "paper") {
-    console.log("You won the round");
-    humanScore++;
-  }
+// Play a round of rps and log choices in the console
+function playRound(userChoice) {
+  const computerChoice = getComputerChoice();
+  console.log("User:" + userChoice);
+  console.log("Computer:" + computerChoice);
+  roundWinner(userChoice, computerChoice);
 }
 
-// Main gameplay functio
-function gameLoop() {
-  let rounds = 0;
-  humanScore = 0;
-  computerScore = 0;
-
-  while (rounds < 5) {
-    const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
-    roundWinner(humanSelection, computerSelection);
-    rounds++;
-    console.log(humanScore);
-    console.log(computerScore);
-  }
-
-  if (humanScore > computerScore) {
-    console.log("You Win!");
-  }
-  if (humanScore < computerScore) {
-    console.log("Computer Wins!");
-  } else {
-    console.log("It's a Tie!");
-  }
-}
-
-console.log(gameLoop());
+// Runs a round setting user choice to btn clicked
+rockButton.addEventListener("click", () => {
+  playRound("rock");
+});
+paperButton.addEventListener("click", () => {
+  playRound("paper");
+});
+scissorsButton.addEventListener("click", () => {
+  playRound("scissors");
+});
