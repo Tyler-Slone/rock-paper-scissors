@@ -1,0 +1,32 @@
+#container {
+  border: solid 3px;
+  border-radius: 25px;
+  min-width: auto;
+  min-height: auto;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+#scoreboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+  justify-content: space-around;
+}
+
+#user {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+#computer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
